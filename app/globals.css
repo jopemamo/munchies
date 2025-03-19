@@ -13,8 +13,8 @@
 
   /* Colors */
   --color-white: #FFFFFF;
-  --color-offWhite: rgba(0, 0, 0, 0.1);
-  --color-stroke: #FAFAFA;
+  --color-offWhite: #FAFAFA;
+  --color-stroke: rgba(0, 0, 0, 0.1);
   --color-black: #000000;
   --color-green: #00703A;
 }

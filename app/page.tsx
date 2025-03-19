@@ -1,7 +1,15 @@
+import Image from 'next/image'
+
 export default function Home() {
   return (
-    <div className="bg-offWhite">
-      <p className="text-display">Munchies!</p>
-    </div>
+    <>
+    <Image
+      src="/MunchiesLogo.svg"
+      alt="Munchies Logo"
+      width={167}
+      height={24}
+      className='md:w-[274px] md:h-[40px]'
+    />
+    </>
   );
 }

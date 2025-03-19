@@ -13,8 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-offWhite">
+        <div className="py-10 px-6 md:py-14 md:pl-10 md:pr-0">
         {children}
+        </div>
       </body>
     </html>
   );
