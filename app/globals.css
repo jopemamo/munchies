@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Font Family */
+  --font-sans: 'SF Pro Display', system-ui, -apple-system, sans-serif;
+
+  /* Font Sizes */
+  --font-size-display: 2.5rem;
+  --font-size-h1: 1.5rem;
+  --font-size-title: 0.875rem;
+  --font-size-subtitle: 0.75rem;
+  --font-size-body: 0.75rem;
+
+  /* Colors */
+  --color-white: #FFFFFF;
+  --color-offWhite: rgba(0, 0, 0, 0.1);
+  --color-stroke: #FAFAFA;
+  --color-black: #000000;
+  --color-green: #00703A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.text-display {
+  font-size: var(--font-size-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.text-h1 {
+  font-size: var(--font-size-h1);
+}
+
+.text-title {
+  font-size: var(--font-size-title);
+}
+
+.text-subtitle {
+  font-size: var(--font-size-subtitle);
+}
+
+.text-body {
+  font-size: var(--font-size-body);
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/fonts/SF-Pro.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'SF Pro', sans-serif;
 }
