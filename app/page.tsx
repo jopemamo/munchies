@@ -9,7 +9,7 @@ export default function Home() {
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
-
+  console.log(restaurants)
   return (
     <>
       <Image
@@ -25,7 +25,7 @@ export default function Home() {
           {restaurants?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
-              isOpen={true}
+              isOpen={restaurant.is_open || false}
               deliveryTimeMinutes={restaurant.delivery_time_minutes}
               imageUrl={restaurant.image_url}
               name={restaurant.name}

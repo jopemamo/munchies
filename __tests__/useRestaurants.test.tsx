@@ -15,6 +15,7 @@ const mockRestaurants: Restaurant[] = [
     image_url: '/images/test.png',
     delivery_time_minutes: 30,
     price_range_id: 'abc',
+    is_open: true,
   },
 ]
 
