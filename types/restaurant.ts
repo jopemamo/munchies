@@ -1,13 +1,13 @@
 export type Restaurant = {
-  id: string;
-  name: string;
-  rating: number;
-  filter_ids: string[];
-  image_url: string;
-  delivery_time_minutes: number;
-  price_range_id: string;
-};
+  id: string
+  name: string
+  rating: number
+  filter_ids: string[]
+  image_url: string
+  delivery_time_minutes: number
+  price_range_id: string
+}
 
 export type RestaurantsResponse = {
-  restaurants: Restaurant[];
-};
+  restaurants: Restaurant[]
+}

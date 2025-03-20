@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Font Family */
@@ -12,11 +12,11 @@
   --font-size-body: 0.75rem;
 
   /* Colors */
-  --color-white: #FFFFFF;
-  --color-offWhite: #FAFAFA;
+  --color-white: #ffffff;
+  --color-offWhite: #fafafa;
   --color-stroke: rgba(0, 0, 0, 0.1);
   --color-black: #000000;
-  --color-green: #00703A;
+  --color-green: #00703a;
 }
 
 .text-display {
