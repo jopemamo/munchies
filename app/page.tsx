@@ -2,11 +2,12 @@
 
 import { useRestaurants } from '@/hooks/useRestaurants'
 import { useFoodCategories } from '@/hooks/useFoodCategories'
-import { useFoodCategoryFilters } from '@/hooks/useFoodCategoryFilters'
+import { useFilters } from '@/hooks/useFilters'
 import RestaurantCard from '@/components/RestaurantCard'
 import FoodCategoryCard from '@/components/FoodCategoryCard'
 import FiltersContainer from '@/components/FiltersContainer'
 import Image from 'next/image'
+import MobileFiltersContainer from '@/components/MobileFiltersContainer'
 
 export default function Home() {
   const {
@@ -21,8 +22,13 @@ export default function Home() {
     error: foodCategoriesError,
   } = useFoodCategories()
 
-  const { selectedCategories, toggleCategory, filteredRestaurants } =
-    useFoodCategoryFilters(restaurants)
+  const {
+    selectedCategories,
+    toggleCategory,
+    selectedDeliveryTimes,
+    toggleDeliveryTime,
+    filteredRestaurants,
+  } = useFilters(restaurants)
 
   if (isLoadingRestaurants || isLoadingFoodCategories)
     return <div>Loading...</div>
@@ -37,16 +43,22 @@ export default function Home() {
         alt="Munchies Logo"
         width={167}
         height={24}
-        className="md:w-[274px] md:h-[40px] mb-7 md:mb-12"
+        className="md:w-[274px] md:h-[40px] mb-6 md:mb-12"
       />
       <div className="md:flex gap-5">
         <FiltersContainer
-          foodCategories={foodCategories || []}
+          foodCategories={foodCategories}
           selectedCategories={selectedCategories}
           toggleCategory={toggleCategory}
+          selectedDeliveryTimes={selectedDeliveryTimes}
+          toggleDeliveryTime={toggleDeliveryTime}
         />
 
         <div className="flex-1 min-w-0">
+          <MobileFiltersContainer
+            selectedDeliveryTimes={selectedDeliveryTimes}
+            toggleDeliveryTime={toggleDeliveryTime}
+          />
           <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
             <div className="inline-flex gap-x-[10px]">
               {foodCategories?.map((category) => (

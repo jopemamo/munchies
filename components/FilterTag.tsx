@@ -1,14 +1,10 @@
-interface FoodCategoryTagProps {
+interface FilterTagProps {
   name: string
   isSelected: boolean
   onClick: () => void
 }
 
-const FoodCategoryTag: React.FC<FoodCategoryTagProps> = ({
-  name,
-  isSelected,
-  onClick,
-}) => {
+const FilterTag: React.FC<FilterTagProps> = ({ name, isSelected, onClick }) => {
   return (
     <button
       className={`py-2 px-3 w-fit border-[#0000001A] border-[0.6px] rounded-lg text-body transition ${
@@ -21,4 +17,4 @@ const FoodCategoryTag: React.FC<FoodCategoryTagProps> = ({
   )
 }
 
-export default FoodCategoryTag
+export default FilterTag
