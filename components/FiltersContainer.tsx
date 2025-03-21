@@ -1,5 +1,6 @@
 import FilterTag from './FilterTag'
 import { FoodCategory } from '@/types/foodCategory'
+import { DELIVERY_TIME_OPTIONS, PRICE_RANGE_OPTIONS } from '@/constants/filters'
 
 interface FiltersContainerProps {
   foodCategories?: FoodCategory[]
@@ -7,14 +8,9 @@ interface FiltersContainerProps {
   toggleCategory: (id: string) => void
   selectedDeliveryTimes: number[]
   toggleDeliveryTime: (time: number) => void
+  selectedPriceRanges: string[]
+  togglePriceRange: (range: string) => void
 }
-
-const deliveryTimeOptions = [
-  { label: '0-10 min', value: 10 },
-  { label: '10-30 min', value: 30 },
-  { label: '30-60 min', value: 60 },
-  { label: '1hour+', value: 61 },
-]
 
 const FiltersContainer: React.FC<FiltersContainerProps> = ({
   foodCategories = [],
@@ -22,6 +18,8 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
   toggleCategory,
   selectedDeliveryTimes,
   toggleDeliveryTime,
+  selectedPriceRanges,
+  togglePriceRange,
 }) => {
   const topCategories = foodCategories.slice(0, 4)
 
@@ -29,7 +27,7 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
     <div className="hidden md:block w-[239px] bg-white p-6 border-[#0000001A] border-[0.6px] rounded-lg shadow-sm">
       <h2 className="text-h1 mb-6">Filter</h2>
       <p className="text-body opacity-40 font-semibold mb-4 uppercase">
-        food category
+        Food Category
       </p>
       <div className="flex flex-col gap-2 mb-6">
         {topCategories.map((category) => (
@@ -45,13 +43,26 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
       <p className="text-body opacity-40 font-semibold mb-4 uppercase">
         Delivery Time
       </p>
-      <div className="flex flex-wrap gap-2">
-        {deliveryTimeOptions.map(({ label, value }) => (
+      <div className="flex flex-wrap gap-2 mb-6">
+        {DELIVERY_TIME_OPTIONS.map(({ label, value }) => (
           <FilterTag
             key={value}
             name={label}
             isSelected={selectedDeliveryTimes.includes(value)}
             onClick={() => toggleDeliveryTime(value)}
+          />
+        ))}
+      </div>
+      <p className="text-body opacity-40 font-semibold mb-4 uppercase">
+        Price Range
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {PRICE_RANGE_OPTIONS.map(({ id, range }) => (
+          <FilterTag
+            key={id}
+            name={range}
+            isSelected={selectedPriceRanges.includes(range)}
+            onClick={() => togglePriceRange(range)}
           />
         ))}
       </div>

@@ -6,6 +6,7 @@ export const useFilters = (restaurants?: Restaurant[]) => {
   const [selectedDeliveryTimes, setSelectedDeliveryTimes] = useState<number[]>(
     []
   )
+  const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([])
 
   const toggleCategory = (categoryId: string) => {
     setSelectedCategories((prev) =>
@@ -21,30 +22,48 @@ export const useFilters = (restaurants?: Restaurant[]) => {
     )
   }
 
-  const filterByDeliveryTime = (restaurant: Restaurant) => {
-    if (selectedDeliveryTimes.length === 0) return true
-
-    const deliveryTime = restaurant.delivery_time_minutes
-    return selectedDeliveryTimes.some((time) => {
-      if (time === 10) return deliveryTime <= 10
-      if (time === 30) return deliveryTime >= 10 && deliveryTime <= 30
-      if (time === 60) return deliveryTime >= 30 && deliveryTime <= 60
-      return deliveryTime >= 60
-    })
+  const togglePriceRange = (range: string) => {
+    setSelectedPriceRanges((prev) =>
+      prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
+    )
   }
 
-  const filteredRestaurants = restaurants?.filter(
-    (restaurant) =>
-      (selectedCategories.length === 0 ||
-        selectedCategories.some((id) => restaurant.filter_ids.includes(id))) &&
-      filterByDeliveryTime(restaurant)
-  )
+  const filteredRestaurants = restaurants?.filter((restaurant) => {
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      selectedCategories.some((id) => restaurant.filter_ids.includes(id))
+
+    const matchesDeliveryTime =
+      selectedDeliveryTimes.length === 0 ||
+      selectedDeliveryTimes.some((time) => {
+        if (time === 10) return restaurant.delivery_time_minutes <= 10
+        if (time === 30)
+          return (
+            restaurant.delivery_time_minutes >= 10 &&
+            restaurant.delivery_time_minutes <= 30
+          )
+        if (time === 60)
+          return (
+            restaurant.delivery_time_minutes >= 30 &&
+            restaurant.delivery_time_minutes <= 60
+          )
+        return restaurant.delivery_time_minutes >= 60
+      })
+
+    const matchesPriceRange =
+      selectedPriceRanges.length === 0 ||
+      selectedPriceRanges.includes(restaurant.price_range)
+
+    return matchesCategory && matchesDeliveryTime && matchesPriceRange
+  })
 
   return {
     selectedCategories,
     toggleCategory,
     selectedDeliveryTimes,
     toggleDeliveryTime,
+    selectedPriceRanges,
+    togglePriceRange,
     filteredRestaurants,
   }
 }

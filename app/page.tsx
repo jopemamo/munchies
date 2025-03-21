@@ -26,7 +26,9 @@ export default function Home() {
     selectedCategories,
     toggleCategory,
     selectedDeliveryTimes,
+    selectedPriceRanges,
     toggleDeliveryTime,
+    togglePriceRange,
     filteredRestaurants,
   } = useFilters(restaurants)
 
@@ -52,6 +54,8 @@ export default function Home() {
           toggleCategory={toggleCategory}
           selectedDeliveryTimes={selectedDeliveryTimes}
           toggleDeliveryTime={toggleDeliveryTime}
+          selectedPriceRanges={selectedPriceRanges}
+          togglePriceRange={togglePriceRange}
         />
 
         <div className="flex-1 min-w-0">
