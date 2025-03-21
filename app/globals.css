@@ -39,6 +39,15 @@
   font-size: var(--font-size-body);
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @font-face {
   font-family: 'SF Pro';
   src: url('/fonts/SF-Pro.ttf') format('truetype');

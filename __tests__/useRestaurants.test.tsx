@@ -16,6 +16,7 @@ const mockRestaurants: Restaurant[] = [
     delivery_time_minutes: 30,
     price_range_id: 'abc',
     is_open: true,
+    price_range: '',
   },
 ]
 
@@ -44,6 +45,7 @@ test('fetches and returns restaurant data with open status', async () => {
         delivery_time_minutes: 30,
         price_range_id: 'abc',
         is_open: true,
+        price_range: '',
       },
     ])
   })

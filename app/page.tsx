@@ -1,15 +1,43 @@
 'use client'
 
 import { useRestaurants } from '@/hooks/useRestaurants'
+import { useFoodCategories } from '@/hooks/useFoodCategories'
+import { useFilters } from '@/hooks/useFilters'
 import RestaurantCard from '@/components/RestaurantCard'
+import FoodCategoryCard from '@/components/FoodCategoryCard'
+import FiltersContainer from '@/components/FiltersContainer'
 import Image from 'next/image'
+import MobileFiltersContainer from '@/components/MobileFiltersContainer'
 
 export default function Home() {
-  const { data: restaurants, isLoading, error } = useRestaurants()
+  const {
+    data: restaurants,
+    isLoading: isLoadingRestaurants,
+    error: restaurantsError,
+  } = useRestaurants()
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
-  console.log(restaurants)
+  const {
+    data: foodCategories,
+    isLoading: isLoadingFoodCategories,
+    error: foodCategoriesError,
+  } = useFoodCategories()
+
+  const {
+    selectedCategories,
+    toggleCategory,
+    selectedDeliveryTimes,
+    selectedPriceRanges,
+    toggleDeliveryTime,
+    togglePriceRange,
+    filteredRestaurants,
+  } = useFilters(restaurants)
+
+  if (isLoadingRestaurants || isLoadingFoodCategories)
+    return <div>Loading...</div>
+  if (restaurantsError) return <div>Error: {restaurantsError.message}</div>
+  if (foodCategoriesError)
+    return <div>Error: {foodCategoriesError.message}</div>
+
   return (
     <>
       <Image
@@ -17,21 +45,51 @@ export default function Home() {
         alt="Munchies Logo"
         width={167}
         height={24}
-        className="md:w-[274px] md:h-[40px] mb-7 md:mb-12"
+        className="md:w-[274px] md:h-[40px] mb-6 md:mb-12"
       />
-      <div>
-        <h1 className="text-xl md:text-[40px] mb-5 md:mb-8">Restaurant's</h1>
-        <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
-          {restaurants?.map((restaurant) => (
-            <RestaurantCard
-              key={restaurant.id}
-              isOpen={restaurant.is_open || false}
-              deliveryTimeMinutes={restaurant.delivery_time_minutes}
-              imageUrl={restaurant.image_url}
-              name={restaurant.name}
-            />
-          ))}
-        </ul>
+      <div className="md:flex gap-5">
+        <FiltersContainer
+          foodCategories={foodCategories}
+          selectedCategories={selectedCategories}
+          toggleCategory={toggleCategory}
+          selectedDeliveryTimes={selectedDeliveryTimes}
+          toggleDeliveryTime={toggleDeliveryTime}
+          selectedPriceRanges={selectedPriceRanges}
+          togglePriceRange={togglePriceRange}
+        />
+
+        <div className="flex-1 min-w-0">
+          <MobileFiltersContainer
+            selectedDeliveryTimes={selectedDeliveryTimes}
+            toggleDeliveryTime={toggleDeliveryTime}
+          />
+          <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
+            <div className="inline-flex gap-x-[10px]">
+              {foodCategories?.map((category) => (
+                <FoodCategoryCard
+                  key={category.id}
+                  name={category.name}
+                  imageUrl={category.image_url}
+                  isSelected={selectedCategories.includes(category.id)}
+                  onClick={() => toggleCategory(category.id)}
+                />
+              ))}
+            </div>
+          </div>
+          <h1 className="text-xl md:text-display mb-5 md:mb-8">Restaurants</h1>
+
+          <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
+            {filteredRestaurants?.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.id}
+                isOpen={restaurant.is_open || false}
+                deliveryTimeMinutes={restaurant.delivery_time_minutes}
+                imageUrl={restaurant.image_url}
+                name={restaurant.name}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   )
