@@ -1,8 +1,8 @@
-// app/page.tsx
 'use client'
 
 import { useRestaurants } from '@/hooks/useRestaurants'
 import { useFoodCategories } from '@/hooks/useFoodCategories'
+import { useFoodCategoryFilters } from '@/hooks/useFoodCategoryFilters'
 import RestaurantCard from '@/components/RestaurantCard'
 import FoodCategoryCard from '@/components/FoodCategoryCard'
 import Image from 'next/image'
@@ -13,11 +13,15 @@ export default function Home() {
     isLoading: isLoadingRestaurants,
     error: restaurantsError,
   } = useRestaurants()
+
   const {
     data: foodCategories,
     isLoading: isLoadingFoodCategories,
     error: foodCategoriesError,
   } = useFoodCategories()
+
+  const { selectedCategories, toggleCategory, filteredRestaurants } =
+    useFoodCategoryFilters(restaurants)
 
   if (isLoadingRestaurants || isLoadingFoodCategories)
     return <div>Loading...</div>
@@ -42,14 +46,16 @@ export default function Home() {
                 key={category.id}
                 name={category.name}
                 imageUrl={category.image_url}
+                isSelected={selectedCategories.includes(category.id)}
+                onClick={() => toggleCategory(category.id)}
               />
             ))}
           </div>
         </div>
-        <h1 className="text-xl md:text-[40px] mb-5 md:mb-8">Restaurant's</h1>
+        <h1 className="text-xl md:text-[40px] mb-5 md:mb-8">Restaurants</h1>
 
         <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
-          {restaurants?.map((restaurant) => (
+          {filteredRestaurants?.map((restaurant) => (
             <RestaurantCard
               key={restaurant.id}
               isOpen={restaurant.is_open || false}
