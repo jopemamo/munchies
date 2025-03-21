@@ -5,6 +5,7 @@ import { useFoodCategories } from '@/hooks/useFoodCategories'
 import { useFoodCategoryFilters } from '@/hooks/useFoodCategoryFilters'
 import RestaurantCard from '@/components/RestaurantCard'
 import FoodCategoryCard from '@/components/FoodCategoryCard'
+import FiltersContainer from '@/components/FiltersContainer'
 import Image from 'next/image'
 
 export default function Home() {
@@ -38,33 +39,41 @@ export default function Home() {
         height={24}
         className="md:w-[274px] md:h-[40px] mb-7 md:mb-12"
       />
-      <div>
-        <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
-          <div className="inline-flex gap-x-[10px]">
-            {foodCategories?.map((category) => (
-              <FoodCategoryCard
-                key={category.id}
-                name={category.name}
-                imageUrl={category.image_url}
-                isSelected={selectedCategories.includes(category.id)}
-                onClick={() => toggleCategory(category.id)}
+      <div className="md:flex gap-5">
+        <FiltersContainer
+          foodCategories={foodCategories || []}
+          selectedCategories={selectedCategories}
+          toggleCategory={toggleCategory}
+        />
+
+        <div className="flex-1 min-w-0">
+          <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
+            <div className="inline-flex gap-x-[10px]">
+              {foodCategories?.map((category) => (
+                <FoodCategoryCard
+                  key={category.id}
+                  name={category.name}
+                  imageUrl={category.image_url}
+                  isSelected={selectedCategories.includes(category.id)}
+                  onClick={() => toggleCategory(category.id)}
+                />
+              ))}
+            </div>
+          </div>
+          <h1 className="text-xl md:text-display mb-5 md:mb-8">Restaurants</h1>
+
+          <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
+            {filteredRestaurants?.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.id}
+                isOpen={restaurant.is_open || false}
+                deliveryTimeMinutes={restaurant.delivery_time_minutes}
+                imageUrl={restaurant.image_url}
+                name={restaurant.name}
               />
             ))}
-          </div>
+          </ul>
         </div>
-        <h1 className="text-xl md:text-[40px] mb-5 md:mb-8">Restaurants</h1>
-
-        <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
-          {filteredRestaurants?.map((restaurant) => (
-            <RestaurantCard
-              key={restaurant.id}
-              isOpen={restaurant.is_open || false}
-              deliveryTimeMinutes={restaurant.delivery_time_minutes}
-              imageUrl={restaurant.image_url}
-              name={restaurant.name}
-            />
-          ))}
-        </ul>
       </div>
     </>
   )
