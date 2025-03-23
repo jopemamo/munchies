@@ -15,7 +15,13 @@ export const useRestaurants = () => {
           return { ...restaurant, is_open, price_range }
         })
       )
-      return restaurantsWithData
+      const sortedRestaurants = restaurantsWithData.sort((a, b) => {
+        if (a.is_open && !b.is_open) return -1
+        if (!a.is_open && b.is_open) return 1
+        return 0
+      })
+
+      return sortedRestaurants
     },
   })
 }
