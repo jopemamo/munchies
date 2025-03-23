@@ -20,7 +20,7 @@ const FoodCategoryCard: React.FC<FoodCategoryCardProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`flex w-[160px] h-[80px] rounded-lg border-[0.6px] border-[#0000001A] shadow-md overflow-hidden
+      className={`flex w-[160px] h-[80px] rounded-lg border-[0.6px] border-[#0000001A] shadow-sm overflow-hidden
         ${isSelected ? 'bg-gray-200' : 'bg-white'}`}
     >
       <span className="mt-3.5 flex-1 pl-3 text-body">{name}</span>

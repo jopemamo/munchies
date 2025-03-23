@@ -81,7 +81,7 @@ export default function Home() {
             toggleDeliveryTime={toggleDeliveryTime}
           />
           <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
-            <div className="inline-flex gap-x-[10px]">
+            <div className="inline-flex gap-x-[10px] pb-1">
               {foodCategories?.map((category) => (
                 <FoodCategoryCard
                   key={category.id}
