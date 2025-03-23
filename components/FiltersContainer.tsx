@@ -26,7 +26,7 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
   return (
     <div className="hidden md:block w-[239px] h-[85vh] bg-white p-6 border-[#0000001A] border-[0.6px] rounded-lg shadow-sm">
       <h2 className="text-h1 mb-6">Filter</h2>
-      <p className="text-body opacity-40 font-semibold mb-4 uppercase">
+      <p className="text-body opacity-40 font-medium mb-4 uppercase">
         Food Category
       </p>
       <div className="flex flex-col gap-2 mb-6">
@@ -40,7 +40,7 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
         ))}
       </div>
 
-      <p className="text-body opacity-40 font-semibold mb-4 uppercase">
+      <p className="text-body opacity-40 font-medium mb-4 uppercase">
         Delivery Time
       </p>
       <div className="flex flex-wrap gap-2 mb-6">
@@ -53,7 +53,7 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
           />
         ))}
       </div>
-      <p className="text-body opacity-40 font-semibold mb-4 uppercase">
+      <p className="text-body opacity-40 font-medium mb-4 uppercase">
         Price Range
       </p>
       <div className="flex flex-wrap gap-2">

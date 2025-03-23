@@ -21,7 +21,7 @@ const WelcomePage = () => {
       <div>
         <h1
           className="text-[48px] tracking-tight
-             text-white font-[760] w-[246px] h-[96px] leading-[48px] mb-4"
+             text-white font-bold w-[246px] h-[96px] leading-[48px] mb-4"
         >
           Treat yourself.
         </h1>
