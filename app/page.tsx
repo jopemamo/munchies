@@ -10,6 +10,7 @@ import FoodCategoryCard from '@/components/FoodCategoryCard'
 import FiltersContainer from '@/components/FiltersContainer'
 import Image from 'next/image'
 import MobileFiltersContainer from '@/components/MobileFiltersContainer'
+import Loading from './loading'
 
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(false)
@@ -49,11 +50,15 @@ export default function Home() {
     filteredRestaurants,
   } = useFilters(restaurants)
 
-  if (isLoadingRestaurants || isLoadingFoodCategories)
-    return <div>Loading...</div>
-  if (restaurantsError) return <div>Error: {restaurantsError.message}</div>
-  if (foodCategoriesError)
-    return <div>Error: {foodCategoriesError.message}</div>
+  if (isLoadingRestaurants || isLoadingFoodCategories) return <Loading />
+
+  if (restaurantsError || foodCategoriesError)
+    return (
+      <div className="text-center py-10 text-red-600">
+        {restaurantsError ? `Error: ${restaurantsError.message}` : ''}
+        {foodCategoriesError ? `Error: ${foodCategoriesError.message}` : ''}
+      </div>
+    )
 
   return (
     <>
