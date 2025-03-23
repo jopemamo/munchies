@@ -1,24 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Munchies Web App
 
-## Getting Started
+Welcome to the Munchies web application! This project is a simple restaurant listing platform where users can explore and filter through a variety of restaurants. The application is built with **Next.js** and deployed on **Vercel**.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Unfiltered Restaurant List**: Displays a complete list of restaurants upon the first visit.
+- **Filter Options**: Users can filter restaurants by different categories from both the sidebar and the topbar.
+- **Multiple Filters**: Users can select multiple filters simultaneously to refine their search.
+- **Deselect Filters**: Filters can be deselected by simply clicking on the active filter to update the list accordingly.
+- **Responsive Design**: The application is responsive, adapting to screen sizes ranging from 375px (mobile) to 1440px (desktop).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js (React-based framework)
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel
+- **API**: The app interacts with a backend service to fetch restaurant data.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
+
+To get the project up and running locally, follow the steps below:
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone git@github.com:jopemamo/munchies.git
+   cd munchies
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+   Your app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Deployment
+
+This application is deployed on Vercel. You can access the live site here:
+
+[https://munchies-black.vercel.app/](https://munchies-black.vercel.app/)
 
 ## Learn More
 
