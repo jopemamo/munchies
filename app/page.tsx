@@ -57,7 +57,7 @@ export default function Home() {
     )
 
   return (
-    <>
+    <div className="bg-offWhite pl-6 py-10 md:py-14 md:pl-10">
       <Image
         src="/MunchiesLogo.svg"
         alt="Munchies Logo"
@@ -65,7 +65,7 @@ export default function Home() {
         height={24}
         className="md:w-[274px] md:h-[40px] mb-6 md:mb-12"
       />
-      <div className="md:flex gap-5">
+      <div className="md:flex gap-5 h-full">
         <FiltersContainer
           foodCategories={foodCategories}
           selectedCategories={selectedCategories}
@@ -81,7 +81,7 @@ export default function Home() {
             selectedDeliveryTimes={selectedDeliveryTimes}
             toggleDeliveryTime={toggleDeliveryTime}
           />
-          <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide">
+          <div className="overflow-x-auto whitespace-nowrap mb-6 scrollbar-hide pr-4">
             <div className="inline-flex gap-x-[10px] pb-1">
               {foodCategories?.map((category) => (
                 <FoodCategoryCard
@@ -99,7 +99,7 @@ export default function Home() {
           {(filteredRestaurants ?? []).length < 1 ? (
             <h1>No restaurants found. Try adjusting your filters!</h1>
           ) : (
-            <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
+            <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px] pr-4">
               {filteredRestaurants?.map((restaurant) => (
                 <RestaurantCard
                   key={restaurant.id}
@@ -113,6 +113,6 @@ export default function Home() {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }

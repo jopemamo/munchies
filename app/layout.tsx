@@ -19,11 +19,7 @@ export default function RootLayout({
     <QueryClientProvider client={queryClient}>
       <html lang="en" className="h-full">
         <body className="h-full">
-          <div
-            className={`${backgroundColor} h-full py-10 px-6 md:py-14 md:pl-10 md:pr-0`}
-          >
-            {children}
-          </div>
+          <div className={`${backgroundColor} h-full`}>{children}</div>
         </body>
       </html>
     </QueryClientProvider>

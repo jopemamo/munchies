@@ -10,7 +10,7 @@ const WelcomePage = () => {
   }, [])
 
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="flex flex-col justify-between h-full px-6 py-10">
       <Image
         src="/MunchiesLogoWhite.svg"
         alt="Munchies Logo"

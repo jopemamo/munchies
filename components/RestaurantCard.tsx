@@ -21,7 +21,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
   return (
     <div
       className="relative w-[327px] h-[202px] bg-white rounded-lg border-[0.6px] border-[#0000001A]
-        shadow-md overflow-hidden flex flex-col justify-between p-4"
+        shadow-md overflow-hidden flex flex-col justify-between p-4 fade-in"
     >
       <div className="flex items-center space-x-2">
         <RestaurantCardDetails>

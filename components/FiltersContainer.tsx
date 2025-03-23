@@ -24,7 +24,7 @@ const FiltersContainer: React.FC<FiltersContainerProps> = ({
   const topCategories = foodCategories.slice(0, 4)
 
   return (
-    <div className="hidden md:block w-[239px] bg-white p-6 border-[#0000001A] border-[0.6px] rounded-lg shadow-sm">
+    <div className="hidden md:block w-[239px] h-[85vh] bg-white p-6 border-[#0000001A] border-[0.6px] rounded-lg shadow-sm">
       <h2 className="text-h1 mb-6">Filter</h2>
       <p className="text-body opacity-40 font-semibold mb-4 uppercase">
         Food Category
