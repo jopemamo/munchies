@@ -95,17 +95,21 @@ export default function Home() {
           </div>
           <h1 className="text-xl md:text-display mb-5 md:mb-8">Restaurants</h1>
 
-          <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
-            {filteredRestaurants?.map((restaurant) => (
-              <RestaurantCard
-                key={restaurant.id}
-                isOpen={restaurant.is_open || false}
-                deliveryTimeMinutes={restaurant.delivery_time_minutes}
-                imageUrl={restaurant.image_url}
-                name={restaurant.name}
-              />
-            ))}
-          </ul>
+          {(filteredRestaurants ?? []).length < 1 ? (
+            <h1>No restaurants found. Try adjusting your filters!</h1>
+          ) : (
+            <ul className="flex flex-wrap gap-x-[17px] gap-y-[17px] md:gap-y-[10px]">
+              {filteredRestaurants?.map((restaurant) => (
+                <RestaurantCard
+                  key={restaurant.id}
+                  isOpen={restaurant.is_open || false}
+                  deliveryTimeMinutes={restaurant.delivery_time_minutes}
+                  imageUrl={restaurant.image_url}
+                  name={restaurant.name}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </>
