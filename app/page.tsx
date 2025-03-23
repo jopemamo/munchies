@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { redirect } from 'next/navigation'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useRestaurants } from '@/hooks/useRestaurants'
 import { useFoodCategories } from '@/hooks/useFoodCategories'
 import { useFilters } from '@/hooks/useFilters'
@@ -13,20 +13,16 @@ import MobileFiltersContainer from '@/components/MobileFiltersContainer'
 import Loading from './loading'
 
 export default function Home() {
-  const [showWelcome, setShowWelcome] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const isMobile = window.innerWidth < 768
     const hasVisited = localStorage.getItem('hasVisited')
 
     if (isMobile && !hasVisited) {
-      setShowWelcome(true)
+      router.replace('/welcome')
     }
   }, [])
-
-  if (showWelcome) {
-    redirect('/welcome')
-  }
 
   const {
     data: restaurants,
