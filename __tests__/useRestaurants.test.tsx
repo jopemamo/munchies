@@ -1,10 +1,12 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { useRestaurants } from '@/hooks/useRestaurants'
 import { fetchRestaurants, fetchOpenStatus } from '@/services/restaurantService'
+import { fetchPriceRange } from '@/services/priceRangeService'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Restaurant } from '@/types/restaurant'
 
 jest.mock('@/services/restaurantService')
+jest.mock('@/services/priceRangeService')
 
 const mockRestaurants: Restaurant[] = [
   {
@@ -16,7 +18,7 @@ const mockRestaurants: Restaurant[] = [
     delivery_time_minutes: 30,
     price_range_id: 'abc',
     is_open: true,
-    price_range: '',
+    price_range: '$',
   },
 ]
 
@@ -26,11 +28,14 @@ const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 )
 
-test('fetches and returns restaurant data with open status', async () => {
-  ;(fetchRestaurants as jest.Mock<Promise<Restaurant[]>>).mockResolvedValue(
-    mockRestaurants
-  )
-  ;(fetchOpenStatus as jest.Mock<Promise<boolean>>).mockResolvedValue(true)
+beforeEach(() => {
+  jest.clearAllMocks()
+})
+
+test('fetches and returns restaurant data with open status and price range', async () => {
+  ;(fetchRestaurants as jest.Mock).mockResolvedValue(mockRestaurants)
+  ;(fetchOpenStatus as jest.Mock).mockResolvedValue(true)
+  ;(fetchPriceRange as jest.Mock).mockResolvedValue('$')
 
   const { result } = renderHook(() => useRestaurants(), { wrapper })
 
@@ -45,7 +50,7 @@ test('fetches and returns restaurant data with open status', async () => {
         delivery_time_minutes: 30,
         price_range_id: 'abc',
         is_open: true,
-        price_range: '',
+        price_range: '$',
       },
     ])
   })

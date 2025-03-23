@@ -6,10 +6,13 @@ import { useFoodCategories } from '@/hooks/useFoodCategories'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '@testing-library/jest-dom'
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}))
+
 jest.mock('@/hooks/useRestaurants')
 jest.mock('@/hooks/useFoodCategories')
 
-// Mock fetch globally
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({ range: '$' }),
@@ -110,7 +113,7 @@ describe('Home Page', () => {
 
     render(<Home />, { wrapper })
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(screen.getByTestId('loading-skeleton')).toBeInTheDocument()
   })
 
   test('renders error state', () => {
