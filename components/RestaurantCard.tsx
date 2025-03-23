@@ -38,14 +38,16 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
       </div>
 
       <div
-        className={`absolute -top-[34px] -right-[16px] ${isOpen ? '' : 'opacity-20'}`}
+        className={`absolute -top-[32px] -right-[15px] ${isOpen ? '' : 'opacity-20'}`}
       >
         <Image
           src={formattedImageUrl}
           alt="Restaurant"
           width={140}
           height={140}
-          className="object-contain"
+          style={{ height: '150px' }}
+          className="w-auto h-auto"
+          priority
         />
       </div>
       {!isOpen && (
