@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import { redirect } from 'next/navigation'
 import { useRestaurants } from '@/hooks/useRestaurants'
 import { useFoodCategories } from '@/hooks/useFoodCategories'
 import { useFilters } from '@/hooks/useFilters'
@@ -10,6 +12,21 @@ import Image from 'next/image'
 import MobileFiltersContainer from '@/components/MobileFiltersContainer'
 
 export default function Home() {
+  const [showWelcome, setShowWelcome] = useState(false)
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768
+    const hasVisited = localStorage.getItem('hasVisited')
+
+    if (isMobile && !hasVisited) {
+      setShowWelcome(true)
+    }
+  }, [])
+
+  if (showWelcome) {
+    redirect('/welcome')
+  }
+
   const {
     data: restaurants,
     isLoading: isLoadingRestaurants,
