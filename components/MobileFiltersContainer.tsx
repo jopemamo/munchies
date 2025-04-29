@@ -1,16 +1,10 @@
 import FilterTag from './FilterTag'
+import { DELIVERY_TIME_OPTIONS } from '@/constants/filters'
 
 interface MobileFiltersContainerProps {
   selectedDeliveryTimes: number[]
   toggleDeliveryTime: (time: number) => void
 }
-
-const deliveryTimeOptions = [
-  { label: '0-10 min', value: 10 },
-  { label: '10-30 min', value: 30 },
-  { label: '30-60 min', value: 60 },
-  { label: '1hour+', value: 61 },
-]
 
 const MobileFiltersContainer: React.FC<MobileFiltersContainerProps> = ({
   selectedDeliveryTimes,
@@ -22,7 +16,7 @@ const MobileFiltersContainer: React.FC<MobileFiltersContainerProps> = ({
         Delivery Time
       </p>
       <div className="flex flex-wrap gap-2.5">
-        {deliveryTimeOptions.map(({ label, value }) => (
+        {DELIVERY_TIME_OPTIONS.map(({ label, value }) => (
           <FilterTag
             key={value}
             name={label}
